@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +19,9 @@ import { ChangeTaskComponent } from './application-components/change-task/change
 import { FooterComponent } from './core/shared/footer/footer.component';
 import { UserProfileComponent } from './application-components/user-profile/user-profile.component';
 import { TaskListComponent } from './application-components/task-list/task-list.component';
+import { AuthenticationService } from './core/services/authentication.service';
+import { RestDataSource } from './core/shared/data/rest.datasource';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -40,10 +44,14 @@ import { TaskListComponent } from './application-components/task-list/task-list.
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    HttpClientModule
   ],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
+    AuthenticationService,
+    RestDataSource,
+    DatePipe,
   ],
   bootstrap: [AppComponent]
 })

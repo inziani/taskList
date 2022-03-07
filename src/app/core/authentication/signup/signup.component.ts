@@ -13,6 +13,7 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+  public datePipe!: any;
 
   public formGroup = new SignUpFormGroup();
   public userSignUp!: SignUpCredentials;
@@ -26,7 +27,9 @@ export class SignupComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private router: Router,
     private dateFormat: DatePipe
-  ) { }
+  ) {
+    this.datePipe = dateFormat
+  }
 
   ngOnInit(): void {
     this.maxDate = new Date;
@@ -40,11 +43,12 @@ export class SignupComponent implements OnInit {
     }
     this.userSignUp = this.formGroup.value;
     console.log(this.userSignUp);
+    this.formSubmitted = true;
     this.authenticationService.onUserSignOn(
       this.userSignUp.username,
       this.userSignUp.email,
       this.userSignUp.name,
-      this.userSignUp.dateOfBirth,
+      this.datePipe.transform(this.userSignUp.dateOfBirth,'yyyy-MM-dd'),
       this.userSignUp.password
     ).subscribe(sucess => {
       if (sucess) {
@@ -60,5 +64,7 @@ export class SignupComponent implements OnInit {
 
 
   }
+
+  
 
 }

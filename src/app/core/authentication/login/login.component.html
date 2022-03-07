@@ -1,1 +1,51 @@
-<p>login works!</p>
+<section class="signup-form mt-5 mb-5" fxLayout="column" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px"
+  fxLayoutAlign="center center">
+  <h1>Log In</h1>
+  <div fxFlex="600px" fxLayout="column" fxFlex.md="100">
+    <form (ngSubmit)="submitForm()" novalidate [formGroup]="formGroup" *ngIf="!isLoading">
+      <div class="bg-danger text-white p-2 mb-2" *ngIf="formSubmitted && formGroup.invalid">
+        <ul>
+          <li *ngFor="let error of formGroup.getFormValidationMessages()">
+            {{ error }}
+          </li>
+        </ul>
+      </div>
+      <div fxLayout='column' fxLayoutGap="13px" fxLayout.lt-md='column' fxLayoutGap.lt-md="13px"
+        fxLayoutAlign="center center">
+        <mat-form-field>
+          <mat-label>email</mat-label>
+          <input type="email" matInput placeholder="email" id="email" name="email" formControlName="email">
+          <ul class="text-danger list-unstyled"
+            *ngIf="(formSubmitted || formGroup.controls['email'].dirty) && formGroup.controls['email'].invalid">
+            <li *ngFor="let error of formGroup.getEmailValidationMessages('email')">{{ error}}</li>
+          </ul>
+        </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Password</mat-label>
+                  <input type="password" matInput hintLabel="Your password should have a minimum of 12 characters"
+                    placeholder="Password" id="password" name="password" formControlName="password">
+                  <mat-hint>Your password must contain 12 characters or more.</mat-hint>
+                  <ul class="text-danger list-unstyled"
+                    *ngIf="(formSubmitted || formGroup.controls['password'].dirty) && formGroup.controls['password'].invalid">
+                    <li *ngFor="let error of formGroup.getPasswordValidationMessages('password')">{{ error}}</li>
+                  </ul>
+                </mat-form-field>
+      </div>
+
+      <div fxLayout='column' fxLayoutAlign="center center" class="mt-5">
+        <button type="submit" mat-raised-button color="primary"
+          [disabled]="!formSubmitted && formGroup.invalid">Submit</button><br>
+        <a class="register" routerLink="/login" style="color:black;">
+          <mat-icon>person_add</mat-icon><span>
+            <p class="mx-3">Register</p>
+          </span>
+        </a><br>
+
+        <p><span><a style="color:black;" routerLink="/home">
+              <mat-icon>home</mat-icon>
+            </a></span></p>
+      </div>
+    </form>
+  </div>
+</section>
+
