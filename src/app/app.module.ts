@@ -13,6 +13,8 @@ import { HomePageComponent } from './application-components/home-page/home-page.
 import { CreateTaskComponent } from './application-components/create-task/create-task.component';
 import { ChangeTaskComponent } from './application-components/change-task/change-task.component';
 import { FooterComponent } from './core/shared/footer/footer.component';
+import { UserProfileComponent } from './application-components/user-profile/user-profile.component';
+import { TaskListComponent } from './application-components/task-list/task-list.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { FooterComponent } from './core/shared/footer/footer.component';
     HomePageComponent,
     CreateTaskComponent,
     ChangeTaskComponent,
-    FooterComponent
+    FooterComponent,
+    UserProfileComponent,
+    TaskListComponent
   ],
   imports: [
     BrowserModule,
