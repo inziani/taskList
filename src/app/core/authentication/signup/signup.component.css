@@ -1,0 +1,27 @@
+
+.mat-form-field{
+   width: 300px;
+   display: inline;
+}
+
+.signup-form{
+   height: 100%;
+}
+
+.name{
+   display: inline-block;
+}
+
+.mat-raised-button{
+   width: 50%;
+   color: white;
+   background-color:black;
+}
+
+.register{
+  display: inline-flex;
+  vertical-align: middle;
+}
+a{
+  text-decoration: none;
+}
