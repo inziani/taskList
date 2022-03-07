@@ -34,14 +34,12 @@ p{
 
 }
 
-.gl-details{
-  background-color: #000000;
-  overflow: hidden;
-}
-
-.mat-card{
-  padding: 0;
-
+.mat-raised-button{
+   width: 40%;
+   color: white;
+   background-color: black;
+   font-weight: lighter;
+   font-size: 18px;
 }
 
 
