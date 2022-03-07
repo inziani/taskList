@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 import { SignUpFormGroup } from '../form-models/signup-form-model';
 import { SignUpCredentials } from '../form-models/authentication.model';
+import { detectOverflow } from '@popperjs/core';
+import { AuthenticationService } from '../../services/authentication.service';
+import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-signup',
@@ -16,13 +20,44 @@ export class SignupComponent implements OnInit {
 
   public isLoading = false;
   public formSubmitted: boolean = false;
+  public error!: string | null;
 
-  constructor() { }
+  constructor(
+    private authenticationService: AuthenticationService,
+    private router: Router,
+    private dateFormat: DatePipe
+  ) { }
 
   ngOnInit(): void {
+    this.maxDate = new Date;
+    this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
+
   }
 
   submitForm() {
+    if (!this.formGroup.valid) {
+      return
+    }
+    this.userSignUp = this.formGroup.value;
+    console.log(this.userSignUp);
+    this.authenticationService.onUserSignOn(
+      this.userSignUp.username,
+      this.userSignUp.email,
+      this.userSignUp.name,
+      this.userSignUp.dateOfBirth,
+      this.userSignUp.password
+    ).subscribe(sucess => {
+      if (sucess) {
+        alert('Welcome');
+        this.router.navigate(['login']);
+      }
+    },
+      error => {
+        this.error = 'Registration Failed';
+        alert(this.error);
+        this.isLoading = false;
+    })
+
 
   }
 
