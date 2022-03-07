@@ -35,11 +35,12 @@ p{
 }
 
 .mat-raised-button{
-   width: 40%;
+   /* width: 40%; */
    color: white;
    background-color: black;
    font-weight: lighter;
-   font-size: 18px;
+   font-size: 16px;
+
 }
 
 
