@@ -23,6 +23,7 @@ import { AuthenticationService } from './core/services/authentication.service';
 import { RestDataSource } from './core/shared/data/rest.datasource';
 import { DatePipe } from '@angular/common';
 import { LoginDialogComponent } from './core/shared/dialogues/login-dialog/login-dialog.component';
+import { ChangesSavedComponent } from './core/shared/dialogues/changes-saved/changes-saved.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { LoginDialogComponent } from './core/shared/dialogues/login-dialog/login
     FooterComponent,
     UserProfileComponent,
     TaskListComponent,
-    LoginDialogComponent
+    LoginDialogComponent,
+    ChangesSavedComponent
   ],
   imports: [
     BrowserModule,

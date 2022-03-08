@@ -1,1 +1,35 @@
-<p>create-task works!</p>
+<h2 mat-dialog-title>{{ title }}</h2>
+<mat-dialog-content>
+  <p>The Dialogue data should be here... {{ dialogDataTask }}</p>
+</mat-dialog-content>
+
+<mat-dialog-content [formGroup]="formGroup">
+
+  <mat-form-field>
+    <mat-label>Title</mat-label>
+    <input type="text" matInput placeholder="Title" id="title" name="title" formControlName="title">
+    <ul class="text-danger list-unstyled"
+      *ngIf="(formSubmitted || formGroup.controls['title'].dirty) && formGroup.controls['title'].invalid">
+      <li *ngFor="let error of formGroup.getTitleNameValidationMessages('title')">{{ error}}</li>
+    </ul>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <input type="text" matInput placeholder="Description" id="description" name="description"
+      formControlName="description">
+    <ul class="text-danger list-unstyled"
+      *ngIf="(formSubmitted || formGroup.controls['description'].dirty) && formGroup.controls['description'].invalid">
+      <li *ngFor="let error of formGroup.getDescriptionValidationMessages('description')">{{ error}}</li>
+    </ul>
+  </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+
+  <button type="submit" mat-raised-button color="primary" [disabled]="!formSubmitted && formGroup.invalid"
+    (click)="onAddTask()">Submit</button>
+  <button type="submit" mat-raised-button color="primary" mat-dialog-close="true">Close</button>
+
+</mat-dialog-actions>
+
