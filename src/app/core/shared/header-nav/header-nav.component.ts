@@ -1,4 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router, RouterEvent } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { RestDataSource } from '../data/rest.datasource';
+
+import { User } from '../models/user-model';
 
 @Component({
   selector: 'app-header-nav',
@@ -8,18 +13,34 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class HeaderNavComponent implements OnInit {
   @Output() sideNavToggle = new EventEmitter<void>();
 
-  public isAuthenticated!: boolean;
-  public loggedInUser: string = 'Val';
+  public isAuthenticated: boolean = false;
+  private userSubscription!: Subscription;
+  public loggedInUser!: any;
+  public user!: any;
+  public userList!: User[];
+  public currentLoggedInUser!: User[];
 
 
-  constructor() {
+  constructor(
+    private dataSource: RestDataSource,
+    private router: Router
+  ) {
 
-    this.isAuthenticated = false;
+    // this.isAuthenticated = false;
 
   }
 
 
   ngOnInit(): void {
+    this.userSubscription = this.dataSource.user.subscribe(user => {
+      this.isAuthenticated = !!user;
+      this.user = user;
+      this.loggedInUser = this.dataSource.fetchUsers().subscribe(users => {
+        this.userList = users;
+        this.loggedInUser = this.userList.filter((person: User) => person.id === this.user);
+        this.currentLoggedInUser = this.loggedInUser;
+      })
+    })
 
   }
   onToggleSidenav() {
@@ -28,7 +49,12 @@ export class HeaderNavComponent implements OnInit {
   }
 
   onLogOut() {
+    this.dataSource.removeToken();
 
+  }
+
+  ngOnDestroy() {
+    this.userSubscription.unsubscribe();
   }
 
 }

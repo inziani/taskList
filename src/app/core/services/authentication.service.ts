@@ -21,9 +21,7 @@ export class AuthenticationService{
     private http: HttpClient,
     private dataSource: RestDataSource
 
-  ) {
-
-  }
+  ) { }
 
   onUserSignOn(
     username: string,
@@ -61,6 +59,14 @@ export class AuthenticationService{
 
   onLogin(email: string, password: string): Observable<any> {
     return this.dataSource.getToken(email, password);
+  }
 
+  onLogout() {
+    // remove user from the local storage
+    this.dataSource.authToken = 'null';
+  }
+
+  get authenticated() {
+    return this.dataSource.authToken != null;
   }
 }

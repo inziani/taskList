@@ -91,6 +91,10 @@ export class RestDataSource{
     return this.http.get<RandomQuote>(`${environment.randomQuotesURL}`, this.httpOptions,);
   }
 
+  fetchUsers(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/register/`, this.httpOptions);
+  }
+
   fetchTasks(): Observable<TasksInterface[]>{
     return this.http.get<TasksInterface[]>(`${environment.apiUrl}/tasks/`, this.httpOptions);
   }

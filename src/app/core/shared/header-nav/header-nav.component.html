@@ -1,15 +1,15 @@
 <mat-toolbar>
-  <button mat-icon-button (click)="onToggleSidenav()">
+  <button mat-icon-button (click)="onToggleSidenav()" *ngIf="isAuthenticated">
     <mat-icon>menu</mat-icon>
   </button>
   <span><a routerLink="/home"><h4>taskList</h4></a></span>
 
   <span class="navbar-spacer"></span>
 
-  <button mat-icon-button  routerLink="/profile">
+  <button mat-icon-button  routerLink="/profile" *ngIf="isAuthenticated">
     <mat-icon>account_circle</mat-icon>
   </button>
-  <button mat-icon-button routerLink="/home" (click)="onLogOut()">
+  <button mat-icon-button routerLink="/home" (click)="onLogOut()" *ngIf="isAuthenticated">
     <mat-icon>logout</mat-icon>
   </button>
 </mat-toolbar>
