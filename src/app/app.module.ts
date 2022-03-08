@@ -25,6 +25,7 @@ import { DatePipe } from '@angular/common';
 import { LoginDialogComponent } from './core/shared/dialogues/login-dialog/login-dialog.component';
 import { ChangesSavedComponent } from './core/shared/dialogues/changes-saved/changes-saved.component';
 import { AuthenInterceptorService } from './_helpers/authen-interceptor.service';
+import { DeleteTaskDialogComponent } from './core/shared/dialogues/delete-task-dialog/delete-task-dialog.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { AuthenInterceptorService } from './_helpers/authen-interceptor.service'
     UserProfileComponent,
     TaskListComponent,
     LoginDialogComponent,
-    ChangesSavedComponent
+    ChangesSavedComponent,
+    DeleteTaskDialogComponent
   ],
   imports: [
     BrowserModule,

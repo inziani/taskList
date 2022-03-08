@@ -10,6 +10,8 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { TasksInterface } from 'src/app/core/shared/interfaces/task-interface';
 import { RandomQuote } from 'src/app/core/shared/interfaces/rendom-quote-interface';
 import { CreateTaskComponent } from '../create-task/create-task.component';
+import { ChangeTaskComponent } from '../change-task/change-task.component';
+import { DeleteTaskDialogComponent } from 'src/app/core/shared/dialogues/delete-task-dialog/delete-task-dialog.component';
 
 @Component({
   selector: 'app-task-list',
@@ -61,7 +63,7 @@ export class TaskListComponent implements OnInit {
 
     const dialogRef = this.dialog.open(CreateTaskComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(newTask => {
-      
+
     })
 
 
@@ -72,9 +74,75 @@ export class TaskListComponent implements OnInit {
   }
   openEditTaskDialog(id: number) {
 
+    // ***create dialog object
+    const dialogConfig = new MatDialogConfig();
+    // ***stop user from closing dialog by clicking elsewhere and other dialog configuration
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '400px';
+    // dialogConfig.direction = 'rtl'
+
+    // ****fetch data from the API
+    this.dataSource.fetchSingleTask(id).subscribe((response) => {
+      let task = response;
+      dialogConfig.data = task;
+
+      // ***Open Dialog
+      const dialogRef = this.dialog.open(ChangeTaskComponent, dialogConfig);
+
+      // ***Returned data from dialogue
+      dialogRef.afterClosed().subscribe(result => {
+
+        if (result == undefined) {
+          return;
+        }
+        else {
+
+          console.log('Editable Data after else button', result);
+
+        }
+
+      });
+
+    });
+
+
   }
 
   openDeleteTaskDialog(id: number) {
+
+     // ***create dialog object
+    const dialogConfig = new MatDialogConfig();
+    // ***stop user from closing dialog by clicking elsewhere and other dialog configuration
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '400px';
+    // dialogConfig.direction = 'rtl'
+
+    // ****fetch data from the API
+    this.dataSource.fetchSingleTask(id).subscribe((response) => {
+      let task = response;
+      dialogConfig.data = task;
+
+      // ***Open Dialog
+      const dialogRef = this.dialog.open(DeleteTaskDialogComponent, dialogConfig);
+
+      // ***Returned data from dialogue
+      dialogRef.afterClosed().subscribe(result => {
+
+        if (result == undefined) {
+          return;
+        }
+        else {
+
+          console.log('Editable Data after else button', result);
+
+        }
+
+      });
+
+    });
+
 
   }
 

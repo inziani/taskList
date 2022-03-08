@@ -38,6 +38,7 @@ export class RestDataSource{
   };
 
   public taskListing!: TasksInterface[];
+  public httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(
     private http: HttpClient,
@@ -103,6 +104,20 @@ export class RestDataSource{
     return this.http.post<Tasks>(`${environment.apiUrl}/tasks/`, JSON.stringify({
       title, description
     }), this.httpOptions);
+  }
+
+
+  fetchSingleTask(id: number): Observable<TasksInterface> {
+    return this.http.get<any>(`${environment.apiUrl}/tasks/` + id + '/', { headers: this.httpHeaders });
+  }
+
+  editTask(id: number, title: string, description: string ): Observable<TasksInterface> {
+    return this.http.patch<any>(`${environment.apiUrl}/tasks/` + id + '/', {title, description },
+      { headers: this.httpHeaders });
+  }
+
+  deleteTask(id: number): Observable<TasksInterface> {
+    return this.http.delete<any>(`${environment.apiUrl}/tasks/` + id + '/');
   }
 
 
