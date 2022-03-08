@@ -5,11 +5,19 @@
   <span><a routerLink="/home"><h4>taskList</h4></a></span>
 
   <span class="navbar-spacer"></span>
+  <h4 *ngFor="let loggedInuser of currentLoggedInUser">{{ loggedInuser.name
+    }}</h4>
 
-  <button mat-icon-button  routerLink="/profile" *ngIf="isAuthenticated">
+<!-- <div class="icon-display">
+  <button mat-icon-button routerLink="/profile" *ngIf="isAuthenticated">
     <mat-icon>account_circle</mat-icon>
   </button>
+  <p *ngFor="let loggedInuser of currentLoggedInUser">{{ loggedInuser.name
+    }}</p>
   <button mat-icon-button routerLink="/home" (click)="onLogOut()" *ngIf="isAuthenticated">
     <mat-icon>logout</mat-icon>
   </button>
+
+</div> -->
+
 </mat-toolbar>

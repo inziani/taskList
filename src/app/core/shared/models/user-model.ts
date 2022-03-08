@@ -5,7 +5,7 @@ export class User{
     public username: string,
     public email: string,
     public dateOfBirth: Date,
-    public date_of_birth: string,
+    public name: string,
     public is_active: boolean,
     public is_staff: boolean,
     public date_joined: Date
