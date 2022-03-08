@@ -22,6 +22,7 @@ import { TaskListComponent } from './application-components/task-list/task-list.
 import { AuthenticationService } from './core/services/authentication.service';
 import { RestDataSource } from './core/shared/data/rest.datasource';
 import { DatePipe } from '@angular/common';
+import { LoginDialogComponent } from './core/shared/dialogues/login-dialog/login-dialog.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { DatePipe } from '@angular/common';
     ChangeTaskComponent,
     FooterComponent,
     UserProfileComponent,
-    TaskListComponent
+    TaskListComponent,
+    LoginDialogComponent
   ],
   imports: [
     BrowserModule,

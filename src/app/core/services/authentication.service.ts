@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { RestDataSource } from '../shared/data/rest.datasource';
 
 import { SignUpResponse } from '../shared/interfaces/signup-response';
 
@@ -17,7 +18,8 @@ export class AuthenticationService{
   public userDetails = new BehaviorSubject<any>(null);
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private dataSource: RestDataSource
 
   ) {
 
@@ -56,4 +58,9 @@ export class AuthenticationService{
     }));
 
   };
+
+  onLogin(email: string, password: string): Observable<any> {
+    return this.dataSource.getToken(email, password);
+
+  }
 }
