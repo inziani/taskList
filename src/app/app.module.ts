@@ -24,6 +24,7 @@ import { RestDataSource } from './core/shared/data/rest.datasource';
 import { DatePipe } from '@angular/common';
 import { LoginDialogComponent } from './core/shared/dialogues/login-dialog/login-dialog.component';
 import { ChangesSavedComponent } from './core/shared/dialogues/changes-saved/changes-saved.component';
+import { AuthenInterceptorService } from './_helpers/authen-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { ChangesSavedComponent } from './core/shared/dialogues/changes-saved/cha
     AuthenticationService,
     RestDataSource,
     DatePipe,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthenInterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]
 })
