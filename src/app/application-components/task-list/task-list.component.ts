@@ -8,6 +8,8 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 
 
 import { TasksInterface } from 'src/app/core/shared/interfaces/task-interface';
+import { RandomQuote } from 'src/app/core/shared/interfaces/rendom-quote-interface';
+import { CreateTaskComponent } from '../create-task/create-task.component';
 
 @Component({
   selector: 'app-task-list',
@@ -15,6 +17,7 @@ import { TasksInterface } from 'src/app/core/shared/interfaces/task-interface';
   styleUrls: ['./task-list.component.css']
 })
 export class TaskListComponent implements OnInit {
+  public randomQuote!: RandomQuote;
 
   public taskListing!: TasksInterface[];
   public taskListingHeaders: string[] = ['id', 'title', 'description', 'owner','date_created', 'date_changed', 'maintenance', 'owner'];
@@ -34,8 +37,12 @@ export class TaskListComponent implements OnInit {
     this.dataSource.fetchTasks().subscribe(taskList => {
       this.taskListing = taskList;
       this.sourceData.data = taskList;
-      console.log(this.taskListing);
+
     });
+
+    this.dataSource.fetchRandomQuotes().subscribe(quotes => {
+      this.randomQuote = quotes;
+    })
   }
 
    ngAfterViewInit() {
@@ -44,6 +51,23 @@ export class TaskListComponent implements OnInit {
 
    }
   openCreateTaskDialog() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '400px';
+
+    // Post data after closing the dialogue box
+
+    const dialogRef = this.dialog.open(CreateTaskComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(newTask => {
+      
+    })
+
+
+
+
+
 
   }
   openEditTaskDialog(id: number) {

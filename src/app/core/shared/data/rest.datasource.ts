@@ -10,6 +10,8 @@ import jwtDecode, { JwtPayload } from 'jwt-decode';
 import { environment } from "src/environments/environment";
 
 import { TasksInterface } from "../interfaces/task-interface";
+import { RandomQuote } from "../interfaces/rendom-quote-interface";
+import { Tasks } from "../models/task-model";
 
 
 
@@ -85,10 +87,22 @@ export class RestDataSource{
     return this.payload;
   }
 
+  fetchRandomQuotes() {
+    return this.http.get<RandomQuote>(`${environment.randomQuotesURL}`, this.httpOptions,);
+  }
+
   fetchTasks(): Observable<TasksInterface[]>{
     return this.http.get<TasksInterface[]>(`${environment.apiUrl}/tasks/`, this.httpOptions);
-
   }
+
+  addTask(title: string, description: string) {
+    return this.http.post<Tasks>(`${environment.apiUrl}/tasks/`, JSON.stringify({
+      title, description
+    }), this.httpOptions);
+  }
+
+
+
 
 
 }
