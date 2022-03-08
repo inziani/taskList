@@ -26,8 +26,7 @@ mat-form-field{
 
 .mat-raised-button{
    width: 25%;
-   color: #03045e;
-   background-color:#fb8500;
-   /* margin-right: 1rem;
-   padding-right: 1rem; */
+   color: white;
+   background-color:black
+
 }
