@@ -15,7 +15,7 @@ export class DeleteTaskDialogComponent implements OnInit {
   public error!: string;
   public isLoading: boolean = false;
   public task!: Tasks;
- 
+
 
   constructor(
 
@@ -34,10 +34,8 @@ export class DeleteTaskDialogComponent implements OnInit {
   onDeleteTask() {
 
     this.dataSource.deleteTask(this.task.id).subscribe(success => {
-      if (success) {
-        this.dialog.open(ChangesSavedComponent);
-      }
-
+      
+      this.dialog.open(ChangesSavedComponent);
     },
       error => {
         this.error = 'The deletion failed';

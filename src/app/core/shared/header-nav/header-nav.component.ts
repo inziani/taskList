@@ -40,7 +40,7 @@ export class HeaderNavComponent implements OnInit {
         this.loggedInUser = this.userList.filter((person: User) => person.id === this.user);
         this.currentLoggedInUser = this.loggedInUser;
       })
-    })
+    });
 
   }
   onToggleSidenav() {

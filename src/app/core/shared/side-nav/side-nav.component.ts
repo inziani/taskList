@@ -1,4 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../../services/authentication.service';
+import { RestDataSource } from '../data/rest.datasource';
 
 @Component({
   selector: 'app-side-nav',
@@ -10,7 +13,9 @@ export class SideNavComponent implements OnInit {
   @Output() closeSideNav = new EventEmitter<void>();
   openPanel: boolean = false;
 
-  constructor() { }
+  constructor(
+    private dataSource: RestDataSource
+  ) { }
 
   ngOnInit(): void {
   }
@@ -21,6 +26,8 @@ export class SideNavComponent implements OnInit {
   }
 
   onLogOut() {
+
+    this.dataSource.removeToken();
 
   }
 

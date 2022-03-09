@@ -11,7 +11,7 @@
   <a mat-list-item routerLink="/profile" (click)="onClose()">
     <mat-icon>manage_accounts</mat-icon><span class="nav-caption">Profile</span>
   </a>
-  <a mat-list-item routerLink="/home" (click)="onLogOut()">
+  <a mat-list-item routerLink="/home" (click)="onLogOut()" (click)="onClose()">
     <mat-icon>logout</mat-icon><span class="nav-caption">Log out</span>
   </a>
 </mat-nav-list>

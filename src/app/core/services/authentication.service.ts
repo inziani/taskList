@@ -61,7 +61,7 @@ export class AuthenticationService{
     return this.dataSource.getToken(email, password);
   }
 
-  onLogout() {
+  logout() {
     // remove user from the local storage
     this.dataSource.authToken = 'null';
   }
